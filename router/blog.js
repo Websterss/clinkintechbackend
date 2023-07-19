@@ -24,7 +24,7 @@ blogrouter.post("/api/post", async(req, res) => {
         await blog.save();
 
     }catch(error){
-        console.log(error);
+
         return res.status(500).json({message:"Check Internet Error"});
     }
 

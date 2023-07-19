@@ -7,15 +7,19 @@ const loginSchema = new mongoose.Schema({
         required: true
     },
     email:{
-        type: String,
+        type:String,
         unique: true,
         required: true
     },
     password:{
         type: String,
         required: true
+    },
+    resetLink:{
+        type: String,
+        default: ''
     }
-});
+}, {timestamps: true});
 
 
 const login = new mongoose.model("Login", loginSchema);
