@@ -4,6 +4,22 @@ const blogs = require("../models/blog");
 const cloudinary = require("../utils/cloudinary");
 
 
+
+blogrouter.get("/api/get/home", async(req, res) => {
+    let blog;
+    try {
+        blog = await blogs.find();
+        function getRand(list) {
+            return [...list].sort(() => Math.floor(Math.random() > 0.5 ? 1 : -1 )).slice(0,3);
+          }
+
+          return res.status(200).json(getRand(blog));
+    } catch (error) {
+        return res.status(500).json({message:"Blog api Error"})
+    }
+})
+
+
 blogrouter.post("/api/post", async(req, res) => {
 
     const { title, image, description, postId } = req.body;
@@ -58,6 +74,8 @@ blogrouter.get("/api/get/:id", async(req, res) => {
 
     return res.status(200).json({blog});
 });
+
+
 
 blogrouter.patch("/api/update/:id", async(req, res) => {
    
